@@ -1,0 +1,55 @@
+openapi: '3.0.2'
+info:
+  title: ZikMu API
+  version: '1.0'
+servers:
+  - url: https://api.zikmu.quentinleclerc.fr/v1
+schemes:
+  - "https"
+  - "http"
+paths:
+ /lyrics:
+    get:
+      summary: "Find Lyrics by spotify_track_id"
+      description: spotify_track_id can be provided to return the associated lyrics if they exists
+      parameters:
+        - name: "spotify_track_id"
+          in: "query"
+          description: "id of the spotify_track"
+          required: true
+          schema:
+            additionalProperties:
+              type: "integer"
+              format: "int64"
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: 'No lyrics found for this track'
+        '429':
+          description: Rate Limit Exceeded
+      security:
+        - api_key: []
+    post:
+      summary: "Find Lyrics by spotify_track_id"
+      description: spotify_track_id can be provided to return the associated lyrics if they exists
+      parameters:
+        - name: "spotify_track_id"
+          in: "path"
+          description: "id of the spotify_track"
+          required: true
+          schema:
+            additionalProperties:
+              type: "integer"
+              format: "int64"
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: 'No lyrics found for this track'
+        '429':
+          description: "Rate Limit Exceeded"
+      security:
+        - api_key: []
+definitions: 
+  Lyrics:
